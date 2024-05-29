@@ -1,20 +1,20 @@
-package service;
+package slash.slash_application.service;
 
-import entity.UserEntity;
-import entity.UserTweetEntity;
+import slash.slash_application.entity.UserEntity;
+import slash.slash_application.entity.UserTweetEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.IUserRepository;
-import repository.IUserTweetRepository;
+import slash.slash_application.repository.IUserRepository;
+import slash.slash_application.repository.IUserTweetRepository;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class UserService {
     private static final List<String> GENDERS = Arrays.asList("male", "female");
+
     @Autowired
     private IUserRepository iUserRepository;
 
@@ -84,10 +84,10 @@ public class UserService {
     }
 
     public List<UserTweetEntity> userFetchTweet(Long userId) {
-        if (userId != null) {
-            List<UserTweetEntity> byUserId = iUserTweetRepository.findAllById(userId);
-            return byUserId;
-        }
+//        if (userId != null) {
+//            List<UserTweetEntity> byUserId = iUserTweetRepository.findAllById(userId);
+//            return byUserId;
+//        }
         return null;
     }
 }

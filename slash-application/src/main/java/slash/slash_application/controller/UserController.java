@@ -1,11 +1,11 @@
-package controller;
+package slash.slash_application.controller;
 
-import entity.UserTweetEntity;
+import slash.slash_application.entity.UserTweetEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.UserService;
+import slash.slash_application.service.UserService;
 
 import java.util.List;
 
@@ -13,10 +13,11 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    private UserController userController;
+//    private UserController userController;
 
     @Autowired
     public UserService userService;
+
     @PostMapping("/new/user")
     public ResponseEntity<String> newUser(@RequestParam("email") String email,
                                           @RequestParam("password") String password) {
