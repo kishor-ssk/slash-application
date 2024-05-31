@@ -1,6 +1,6 @@
-package repository;
+package slash.slash_application.repository;
 
-import entity.UserEntity;
+import slash.slash_application.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IUserRepository extends JpaRepository<UserEntity,Long> {

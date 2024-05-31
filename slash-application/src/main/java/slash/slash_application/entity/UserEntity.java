@@ -1,4 +1,4 @@
-package entity;
+package slash.slash_application.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
