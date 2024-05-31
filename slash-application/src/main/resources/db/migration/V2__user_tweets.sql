@@ -4,8 +4,8 @@ CREATE SEQUENCE IF NOT EXISTS user_tweets_user_tweet_id_seq;
 
 CREATE TABLE IF NOT EXISTS user_tweets(
     user_tweet_id bigint NOT NULL DEFAULT nextval('user_tweets_user_tweet_id_seq'),
-    user_id bigint NOT NULL,
-    tweet varchar(200) NOT NULL,
+    user_id bigint NULL,
+    tweet varchar(200) NULL,
     creation_time timestamp with time zone NULL DEFAULT NOW()
 );
 

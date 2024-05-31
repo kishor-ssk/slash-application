@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface IUserTweetRepository extends JpaRepository<UserTweetEntity, Long > {
 
-//    List<UserTweetEntity> findAllById(Long userId);
+    List<UserTweetEntity> findByUserId(Long userId);
+
 }

@@ -1,5 +1,6 @@
 package slash.slash_application.service;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import slash.slash_application.entity.UserEntity;
 import slash.slash_application.entity.UserTweetEntity;
 import jakarta.transaction.Transactional;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import slash.slash_application.repository.IUserRepository;
 import slash.slash_application.repository.IUserTweetRepository;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,7 +28,9 @@ public class UserService {
         if (isInputValid(email, password)) {
             UserEntity userEntity = new UserEntity();
             userEntity.setEmail(email);
-            userEntity.setPassword(password);
+            BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+            String encryptPwd = bcrypt.encode(password);
+            userEntity.setPassword(encryptPwd);
             iUserRepository.save(userEntity);
             return "details are saved";
         }
@@ -66,7 +70,8 @@ public class UserService {
 
     public Boolean userValid(String email, String password) {
         UserEntity byEmail = iUserRepository.findByEmail(email);
-        if (byEmail.getPassword().equals(password)) {
+        BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+        if (bcrypt.matches(password, byEmail.getPassword())) {
             return true;
         } else {
             return false;
@@ -76,6 +81,7 @@ public class UserService {
     public Boolean userTweet(Long userId, String tweet) {
         if (userId != null) {
             UserTweetEntity userTweetEntity = new UserTweetEntity();
+            userTweetEntity.setUserId(userId);
             userTweetEntity.setTweet(tweet);
             iUserTweetRepository.save(userTweetEntity);
             return true;
@@ -84,10 +90,11 @@ public class UserService {
     }
 
     public List<UserTweetEntity> userFetchTweet(Long userId) {
-//        if (userId != null) {
-//            List<UserTweetEntity> byUserId = iUserTweetRepository.findAllById(userId);
-//            return byUserId;
-//        }
-        return null;
+        List<UserTweetEntity> response = new ArrayList<>();
+        List<UserTweetEntity> userTweetEntity = iUserTweetRepository.findByUserId(userId);
+        for (UserTweetEntity tweet : userTweetEntity){
+            response.add(tweet);
+        }
+        return response;
     }
 }

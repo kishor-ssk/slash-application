@@ -13,10 +13,11 @@ import java.util.List;
 @RestController
 public class UserController {
 
-//    private UserController userController;
+//    @Autowired
+//    public UserController userController;
 
     @Autowired
-    public UserService userService;
+    private UserService userService;
 
     @PostMapping("/new/user")
     public ResponseEntity<String> newUser(@RequestParam("email") String email,
@@ -30,7 +31,7 @@ public class UserController {
         return new ResponseEntity<Boolean>(userService.userValid(phoneNumber, emailId), HttpStatus.OK);
     }
 
-    @GetMapping("/user/details")
+    @PostMapping("/user/details")
     public ResponseEntity<Boolean> userDetails(@RequestParam("userid") Long userId,
                                                @RequestParam("name") String name,
                                                @RequestParam("dateofbirth") String dateOfBirth,

@@ -16,12 +16,12 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name="user_tweets")
 public class UserTweetEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_tweets_generator")
-    @SequenceGenerator(name="user_details_generator", sequenceName = "user_tweets_user_tweet_id_seq", allocationSize=1)
+    @SequenceGenerator(name="user_tweets_generator", sequenceName = "user_tweets_user_tweet_id_seq", allocationSize=1)
     @Column(name="user_tweet_id")
     private Long userTweetId;
-
     @Column(name="user_id")
     private Long userId;
 
